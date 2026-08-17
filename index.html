@@ -1,1 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación del Desempeño Docente - C.E.C. Padre Mario Zanconato</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --primary-hover: #2c5282;
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --border-color: #e2e8f0;
+            --accent-color: #3182ce;
+            --focus-ring: rgba(49, 130, 206, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px 15px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 25px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+        }
+
+        header h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            opacity: 0.95;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 0.85rem;
+            opacity: 0.85;
+        }
+
+        .instruction-box {
+            background-color: #ebf8ff;
+            border-left: 4px solid var(--accent-color);
+            padding: 18px 20px;
+            margin: 20px 25px 0 25px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.9rem;
+            color: #2b6cb0;
+        }
+
+        .instruction-box strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--primary-color);
+        }
+
+        form {
+            padding: 25px;
+        }
+
+        .form-section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 18px;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: #4a5568;
+        }
+
+        select, input[type="text"], input[type="number"], input[type="date"], textarea {
+            padding: 10px 14px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.92rem;
+            color: var(--text-color);
+            transition: all 0.2s ease;
+            outline: none;
+            width: 100%;
+            background-color: #fff;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--focus-ring);
+        }
+
+        .scale-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .scale-table th, .scale-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px;
+        }
+
+        .scale-table th {
+            background-color: #f7fafc;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .question-item {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+
+        .likert-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 450px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+
+        .likert-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .likert-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--accent-color);
+        }
+
+        .likert-option span {
+            font-size: 0.8rem;
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .btn-submit {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-submit:disabled {
+            background-color: #a0aec0;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px 5px; }
+            form { padding: 15px; }
+            .likert-options { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>COMPLEJO EDUCATIVO CATÓLICO “PADRE MARIO ZANCONATO”</h1>
+        <h2>INSTRUMENTO DE EVALUACIÓN DEL DESEMPEÑO DOCENTE EDUCACIÓN MEDIA</h2>
+        <p>CÓDIGO DE INFRAESTRUCTURA 88044 | SAN MARCOS, SAN SALVADOR SUR, SAN SALVADOR</p>
+    </header>
+
+    <div class="instruction-box">
+        <strong>OBJETIVO DEL INSTRUMENTO:</strong>
+        Recoger la percepción del estudiantado de Bachillerato sobre el desempeño docente en el aula, considerando aspectos pedagógicos, organizativos y relacionales, con el fin de valorar las fortalezas e identificar oportunidades de mejora, para establecer mecanismos que contribuyan a mejorar la calidad educativa.
+        <br><br>
+        <strong>INDICACIONES PARA EL ESTUDIANTE:</strong>
+        Lee atentamente cada pregunta y marca la opción que mejor refleje tu experiencia con cada docente. No hay respuestas correctas o incorrectas. Su opinión es muy valiosa y será utilizada únicamente para fines de mejora educativa.
+    </div>
+
+    <form id="evaluationForm">
+        
+        <!-- DATOS GENERALES -->
+        <div class="form-section">
+            <h3 class="section-title">DATOS GENERALES DEL ESTUDIANTE</h3>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label for="fecha">Fecha *</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edad">Edad *</label>
+                    <input type="number" id="edad" name="edad" min="12" max="25" placeholder="Ej. 16" required>
+                </div>
+
+                <div class="form-group" style="grid-column: span 2;">
+                    <label for="educacion_media">Educación Media (Grado, Sección y Opción) *</label>
+                    <select id="educacion_media" name="educacion_media" onchange="updateAsignaturas()" required>
+                        <option value="">-- Seleccione su Grupo / Sección --</option>
+                        <option value="1G_A">Primer Año de Bachillerato General “A”</option>
+                        <option value="1G_B">Primer Año Bachillerato General “B”</option>
+                        <option value="1G_C">Primer Año Bachillerato General “C”</option>
+                        <option value="1AC_A">Primer Año Bachillerato Administrativo Contable “A”</option>
+                        <option value="2G_A">Segundo Año Bachillerato General “A”</option>
+                        <option value="2G_B">Segundo Año Bachillerato General “B”</option>
+                        <option value="2AC_A">Segundo Año Bachillerato Administrativo Contable “A”</option>
+                        <option value="3AC_A">Tercer Año Bachillerato Administrativo Contable “A”</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="grid-column: span 2;">
+                    <label for="asignatura_docente">Asignatura y/o Módulo a evaluar (Docente) *</label>
+                    <select id="asignatura_docente" name="asignatura_docente" required>
+                        <option value="">-- Primero seleccione su Educación Media --</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESCALA DE EVALUACIÓN -->
+        <div class="form-section">
+            <h3 class="section-title">ESCALA DE VALORACIÓN</h3>
+            <table class="scale-table">
+                <thead>
+                    <tr>
+                        <th>(1)</th>
+                        <th>(2)</th>
+                        <th>(3)</th>
+                        <th>(4)</th>
+                        <th>(5)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Totalmente en desacuerdo</td>
+                        <td>En desacuerdo</td>
+                        <td>Ni de acuerdo, Ni en desacuerdo</td>
+                        <td>De acuerdo</td>
+                        <td>Totalmente de acuerdo</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- DIMENSIÓN 1 -->
+            <h4 style="color: var(--primary-color); margin: 20px 0 10px 0;">Dimensión 1: Planificación y organización de la clase</h4>
+            
+            <div class="question-item">
+                <p class="question-text">1. El docente comienza la clase puntualmente.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d1_p1" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p1" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p1" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p1" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p1" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">2. El docente organiza bien el tiempo durante la clase.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d1_p2" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p2" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p2" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p2" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p2" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">3. Las temáticas desarrolladas en clases están bien estructuradas.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d1_p3" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p3" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p3" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p3" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p3" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">4. El docente explica los objetivos de cada clase al inicio.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d1_p4" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p4" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p4" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p4" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p4" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">5. Se nota que el docente prepara sus clases con anticipación.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d1_p5" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p5" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p5" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p5" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p5" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">6. Comparte información actualizada, pertinente y contextualizada en el desarrollo de cada uno de los contenidos.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d1_p6" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p6" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p6" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p6" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d1_p6" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <!-- DIMENSIÓN 2 -->
+            <h4 style="color: var(--primary-color); margin: 25px 0 10px 0;">Dimensión 2: Estrategias de enseñanza</h4>
+
+            <div class="question-item">
+                <p class="question-text">7. El docente explica los contenidos de forma clara.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d2_p1" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p1" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p1" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p1" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p1" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">8. Utiliza ejemplos que ayudan a entender mejor los temas.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d2_p2" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p2" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p2" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p2" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p2" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">9. Varía las actividades para que las clases no sean aburridas.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d2_p3" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p3" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p3" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p3" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p3" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">10. Promueve el pensamiento crítico y la participación de todos los estudiantes.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d2_p4" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p4" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p4" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p4" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p4" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">11. Usa recursos como videos, presentaciones o materiales extra para apoyar la clase.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d2_p5" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p5" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p5" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p5" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p5" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">12. Fomenta el trabajo en grupos para construir los aprendizajes.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d2_p6" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p6" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p6" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p6" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d2_p6" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <!-- DIMENSIÓN 3 -->
+            <h4 style="color: var(--primary-color); margin: 25px 0 10px 0;">Dimensión 3: Evaluación y retroalimentación</h4>
+
+            <div class="question-item">
+                <p class="question-text">13. El docente explica claramente cómo se evaluará.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d3_p1" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p1" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p1" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p1" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p1" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">14. Corrige los trabajos y evaluaciones (exámenes) con justicia.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d3_p2" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p2" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p2" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p2" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p2" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">15. Brinda recuperación después de cada periodo que ayuda a mejorar.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d3_p3" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p3" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p3" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p3" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p3" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">16. Me siento evaluado(a) de forma objetiva.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d3_p4" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p4" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p4" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p4" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p4" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">17. El docente permite que pregunte sobre mis calificaciones.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d3_p5" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p5" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p5" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p5" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p5" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">18. Brinda indicaciones claras para la realización de las tareas y actividades.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d3_p6" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p6" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p6" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p6" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d3_p6" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <!-- DIMENSIÓN 4 -->
+            <h4 style="color: var(--primary-color); margin: 25px 0 10px 0;">Dimensión 4: Relación con el estudiantado</h4>
+
+            <div class="question-item">
+                <p class="question-text">19. El docente me trata con respeto en todo momento dentro o fuera del aula.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d4_p1" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p1" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p1" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p1" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p1" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">20. Escucha mis opiniones y dudas con atención.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d4_p2" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p2" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p2" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p2" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p2" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">21. Mantiene un ambiente de respeto en el aula.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d4_p3" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p3" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p3" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p3" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p3" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">22. Fomenta la participación activa sin ridiculizar o menos preciar a nadie.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d4_p4" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p4" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p4" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p4" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p4" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">23. Me siento cómodo(a) al participar en sus clases.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d4_p5" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p5" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p5" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p5" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p5" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">24. Promueve la práctica y vivencia de valores espirituales.</p>
+                <div class="likert-options">
+                    <label class="likert-option"><input type="radio" name="d4_p6" value="1" required><span>1</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p6" value="2"><span>2</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p6" value="3"><span>3</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p6" value="4"><span>4</span></label>
+                    <label class="likert-option"><input type="radio" name="d4_p6" value="5"><span>5</span></label>
+                </div>
+            </div>
+
+        </div>
+
+        <button type="submit" id="btnSubmit" class="btn-submit">Enviar Evaluación</button>
+    </form>
+</div>
+
+<script>
+// URL DE GOOGLE APPS SCRIPT
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzM_gijr6HShfnBQCqIm0zNsZ8wYrmjPfgvnEvN07TxeqwLPN266U_2wir4nZjx_PwwZg/exec";
+
+const asignaturasPorGrupo = {
+    "1G_A": [
+        "Lengua y Literatura (JUAN MILTON HAYALIL SORTO)",
+        "Inglés (OSWALDO HILDEBRANDON SEGURO ORTIZ)",
+        "Precálculo (JOSE DOMINGO CABALLERO ALVARADO)",
+        "Ciencia y Tecnología (MERCEDES ELIZABETH RAMÍREZ ALVARADO)",
+        "Ciudadanía y Valores (MARIA ISABEL MENDOZA DE LÓPEZ)",
+        "Proyecto de Vida y Carrera (MARIA ISABEL MENDOZA DE LÓPEZ)",
+        "Finanzas y Economía (JOSE ANTONIO HERNANDEZ)",
+        "Ciencias de la Computación (MIREYA BEATRIZ PÉREZ DE ROMERO)",
+        "Educación en la Fe (SANDRA CECILIA ANGEL)"
+    ],
+    "1G_B": [
+        "Lengua y Literatura (KRISSIA MARIBEL SANCHEZ ANGEL)",
+        "Inglés (OSWALDO HILDEBRANDON SEGURO ORTIZ)",
+        "Precálculo (JOSE DOMINGO CABALLERO ALVARADO)",
+        "Ciencia y Tecnología (MERCEDES ELIZABETH RAMÍREZ ALVARADO)",
+        "Ciudadanía y Valores (MARIA ISABEL MENDOZA DE LÓPEZ)",
+        "Proyecto de Vida y Carrera (JUAN MILTON HAYALIL SORTO)",
+        "Finanzas y Economía (JOSE ANTONIO HERNANDEZ)",
+        "Ciencias de la Computación (MIREYA BEATRIZ PÉREZ DE ROMERO)",
+        "Educación en la Fe (PADRE DIEGO JOSÉ MÁRQUEZ RODENAS)",
+        "Educación física (VICENTE ALFREDO MORALES AJURIA)"
+    ],
+    "1G_C": [
+        "Lengua y Literatura (KRISSIA MARIBEL SANCHEZ ANGEL)",
+        "Inglés (BEATRIZ ABIGAIL CHAVEZ)",
+        "Precálculo (SAMUEL WILFREDO CHAVEZ)",
+        "Ciencia y Tecnología (MERCEDES ELIZABETH RAMÍREZ ALVARADO)",
+        "Ciudadanía y Valores (KRISSIA MARIBEL SANCHEZ ANGEL)",
+        "Proyecto de Vida y Carrera (JUAN MILTON HAYALIL SORTO)",
+        "Finanzas y Economía (JHON ROSEMBERG RAMIREZ VASQUEZ)",
+        "Ciencias de la Computación (MARIO ALBERTO MAGAÑA CUELLAR)",
+        "Proyecto de Vida y Carrera (JOHANNA HERNANDEZ URIAS)",
+        "Educación en la Fe (SANDRA CECILIA ANGEL)",
+        "Educación física (HENRY ABRAHAM JACOBO HERRERA)"
+    ],
+    "2G_A": [
+        "Lengua y Literatura (JUAN MILTON HAYALIL SORTO)",
+        "Inglés (OSWALDO HILDEBRANDON SEGURO ORTIZ)",
+        "Precálculo (JOSE DOMINGO CABALLERO ALVARADO)",
+        "Ciencia y Tecnología (BRANDON ESAU CASTILLO MORENO)",
+        "Ciudadanía y Valores (MARIA ISABEL MENDOZA DE LÓPEZ)",
+        "Proyecto de Vida y Carrera (JUAN MILTON HAYALIL SORTO)",
+        "Finanzas y Economía (JOSE ANTONIO HERNANDEZ)",
+        "Ciencias de la Computación (MIREYA BEATRIZ PÉREZ DE ROMERO)",
+        "Educación en la Fe (SANDRA CECILIA ANGEL)",
+        "Educación física (HENRY ABRAHAM JACOBO HERRERA)"
+    ],
+    "2G_B": [
+        "Lengua y Literatura (JUAN MILTON HAYALIL SORTO)",
+        "Inglés (OSWALDO HILDEBRANDON SEGURO ORTIZ)",
+        "Precálculo (JOSE DOMINGO CABALLERO ALVARADO)",
+        "Ciencia y Tecnología (BRANDON ESAU CASTILLO MORENO)",
+        "Ciudadanía y Valores (FRANCIS ARTURO VASQUEZ)",
+        "Proyecto de Vida y Carrera (JUAN MILTON HAYALIL SORTO)",
+        "Finanzas y Economía (JOSE ANTONIO HERNANDEZ)",
+        "Ciencias de la Computación (MARIO ALBERTO MAGAÑA CUELLAR)",
+        "Educación en la Fe (SANDRA CECILIA ANGEL)",
+        "Educación física (HENRY ABRAHAM JACOBO HERRERA)"
+    ],
+    "1AC_A": [
+        "Lengua y Literatura (KRISSIA MARIBEL SANCHEZ ANGEL)",
+        "Matemáticas (JOSE ALEJANDRO MONGE CALDERON)",
+        "Ciencias Naturales (BRANDON ESAU CASTILLO MORENO)",
+        "Estudios Sociales y Cívica (MARIA ISABEL MENDOZA DE LOPEZ)",
+        "Idioma Extranjero-Inglés (PAMELA GUADALUPE SALAZAR DE DOMINGUEZ)",
+        "Informática Educativa (MIREYA BEATRIZ DE ROMERO)",
+        "Educación Física (ALEJANDRO GUILLERMO MORENO AJURIA)",
+        "Educación en la Fe (PADRE DIEGO JOSE MARQUEZ)",
+        "Orientación de estudiantes al proceso educativo del primer año de estudio (JHON ROSEMBERG RAMIREZ VASQUEZ)",
+        "Manejo de Información y Registro contable (JHON ROSEMBERG RAMIREZ VASQUEZ)",
+        "Manejo, redacción y archivo de documentación en la empresa (JHON ROSEMBERG RAMIREZ VASQUEZ)",
+        "Organización de archivos electrónicos de los sistemas administrativos y financieros en la empresa (JHON ROSEMBERG RAMIREZ VASQUEZ)",
+        "Mantenimiento y uso eficiente de recursos técnicos y tecnológicos (JOSE ANTONIO HERNANDEZ)",
+        "Gestión de Procesos y Control Interno de Empresas (JOSE ANTONIO HERNANDEZ)",
+        "Interpretación de información en inglés sobre contabilidad y documentación (PAMELA GUADALUPE SALAZAR)",
+        "Emprendedurismo Colaborativo (JOSE ANTONIO HERNANDEZ)",
+        "Proyecto tecnológico para la organización administrativa de las MIPYME (JHON ROSEMBERG RAMIREZ VASQUEZ)"
+    ],
+    "2AC_A": [
+        "Lengua y Literatura (JUAN MILTON HAYALIL SORTO)",
+        "Matemáticas (JOSE ALEJANDRO MONGE CALDERON)",
+        "Ciencias Naturales (MERCEDES ELIZABETH RAMÍREZ ALVARADO)",
+        "Estudios Sociales y Cívica (MARIA ISABEL MENDOZA DE LOPEZ)",
+        "Idioma Extranjero (PAMELA GUADALUPE SALAZAR DE DOMINGUEZ)",
+        "Educación Física (ALEJANDRO GUILLERMO MORENO AJURIA)",
+        "Educación en la Fe (PADRE DIEGO JOSE MARQUEZ)",
+        "Orientación de estudiantes al proceso educativo del segundo año de estudio (JOSE DOMINGO CABALLERO)",
+        "Cálculo de costos y presupuestos operativos de la empresa (JHON ROSEMBERG RAMIREZ VASQUEZ)",
+        "Elaboración y Análisis de Estados Financieros (JOSE ANTONIO HERNANDEZ)",
+        "Aplicación de la legislación tributaria a las operaciones empresariales (JOSE ANTONIO HERNANDEZ)",
+        "Gestión de compras en empresa privada y pública (JOSE ANTONIO HERNANDEZ)",
+        "Gestión de información y atención al cliente (JHON ROSEMBERG RAMIREZ VASQUEZ)",
+        "Interpretación de información en inglés sobre finanzas, costos, presupuestos y leyes (PAMELA GUADALUPE SALAZAR DE DOMINGUEZ)",
+        "Diseño de planes de negocio en Asociatividad Cooperativa (JHON ROSEMBERG RAMIREZ VASQUEZ)",
+        "Proyectos Tecnológicos sobre nuevas herramientas informáticas para el manejo de las operaciones empresariales (JHON ROSEMBERG RAMIREZ VASQUEZ)"
+    ],
+    "3AC_A": [
+        "Orientación de estudiantes al proceso educativo del tercer año de estudio (HECTOR ANTONIO ENAMORADO)",
+        "Registro de transacciones y elaboración de estados financieros para los sectores de la banca, seguros, agrícola y gobierno (HECTOR ANTONIO ENAMORADO)",
+        "Aplicación de la legislación mercantil, laboral y aduanera a las operaciones empresariales (JHON ROSEMBERG RAMIREZ VASQUEZ)",
+        "Técnicas para administración del recurso humano (HECTOR ANTONIO ENAMORADO)",
+        "Formulación de proyectos de comercialización internacional (HECTOR ANTONIO ENAMORADO)",
+        "Cálculos financieros aplicados a los negocios (HECTOR ANTONIO ENAMORADO)",
+        "Interpretación de información en inglés sobre mercadeo y comercialización (HECTOR ANTONIO ENAMORADO)",
+        "Puesta en marcha de la microempresa en Asociatividad Cooperativa (HECTOR ANTONIO ENAMORADO)",
+        "Elaboración de proyecto emprendedor para la autoempleabilidad (HECTOR ANTONIO ENAMORADO)",
+        "Educación en la Fe (PADRE DIEGO JOSÉ MARQUEZ)",
+        "Inglés (BEATRIZ ABIGAIL CHAVEZ)",
+        "Educación Física (VICENTE MORALES AJURIA)"
+    ]
+};
+
+function updateAsignaturas() {
+    const grupoSelect = document.getElementById("educacion_media");
+    const asignaturaSelect = document.getElementById("asignatura_docente");
+    const grupoSeleccionado = grupoSelect.value;
+
+    asignaturaSelect.innerHTML = '<option value="">-- Seleccione Asignatura / Docente --</option>';
+
+    if (grupoSeleccionado && asignaturasPorGrupo[grupoSeleccionado]) {
+        asignaturasPorGrupo[grupoSeleccionado].forEach(item => {
+            const option = document.createElement("option");
+            option.value = item;
+            option.textContent = item;
+            asignaturaSelect.appendChild(option);
+        });
+    }
+}
+
+// Establece automáticamente la fecha actual
+document.getElementById('fecha').valueAsDate = new Date();
+
+// Envío dinámico compatible con Google Apps Script
+document.getElementById('evaluationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById('btnSubmit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Enviando respuestas...";
+
+    const formData = new FormData(this);
+    const searchParams = new URLSearchParams(formData);
+
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: searchParams.toString()
+    })
+    .then(() => {
+        alert("¡Evaluación enviada con éxito a Google Sheets!");
+        document.getElementById('evaluationForm').reset();
+        document.getElementById('fecha').valueAsDate = new Date();
+    })
+    .catch(error => {
+        console.error("Error al enviar los datos:", error);
+        alert("Ocurrió un problema al guardar la evaluación. Por favor intenta de nuevo.");
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Enviar Evaluación";
+    });
+});
+</script>
+
+</body>
+</html>
 
