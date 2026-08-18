@@ -751,7 +751,7 @@ document.getElementById('evaluationForm').addEventListener('submit', function(e)
         body: searchParams.toString()
     })
     .then(() => {
-        alert("¡Evaluación enviada con éxito a Google Sheets!");
+        alert("¡Evaluación enviada con éxito, continua hasta completar los docentes de tu sección!");
         document.getElementById('evaluationForm').reset();
         document.getElementById('fecha').valueAsDate = new Date();
     })
